@@ -13,7 +13,7 @@ const Login = () => {
     <div className="login">
       <GoogleLogin
         clientId="
-        62126108860-l9eai98p2qspo0amkhbbsu9e7puhar5e.apps.googleusercontent.com
+        https://5e347845fbfd.ngrok.io/connect/google
         "
         buttonText="Login"
         onSuccess={responseGoogle}

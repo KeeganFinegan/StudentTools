@@ -83,7 +83,7 @@ export default function TemporaryDrawer() {
           button
           key="Grade Calculator"
           onClick={() => {
-            history.push('/grade-calculator');
+            history.push('/login');
           }}
         >
           <ListItemIcon>
@@ -115,7 +115,6 @@ export default function TemporaryDrawer() {
             </Typography>
             <Button
               color="inherit"
-              key="Login"
               onClick={() => {
                 history.push('/login');
               }}

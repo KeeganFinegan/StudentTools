@@ -40,7 +40,7 @@ export default function ButtonAppBar() {
             color="inherit"
             aria-label="menu"
           >
-            <MenuIcon href="/Login" />
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Student Tools

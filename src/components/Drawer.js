@@ -113,7 +113,12 @@ export default function TemporaryDrawer() {
             <Typography variant="h6" className={classes.title}>
               <img src={logo} alt="student tools" />
             </Typography>
-            <Button color="inherit" href="/Login">
+            <Button
+              color="inherit"
+              onClick={() => {
+                history.push('/Login');
+              }}
+            >
               Login
             </Button>
           </Toolbar>

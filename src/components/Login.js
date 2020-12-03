@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 // or
 import { GoogleLogin } from 'react-google-login';
+import { Redirect } from 'react-router';
 
 const responseGoogle = (response) => {
   console.log(response);
@@ -11,15 +12,15 @@ const responseGoogle = (response) => {
 const Login = () => {
   return (
     <div className="login">
-      <GoogleLogin
-        clientId="
-        https://5e347845fbfd.ngrok.io/connect/google
-        "
-        buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-      />
+      <button
+        onClick={() => {
+          window.location.replace(
+            'https://5e347845fbfd.ngrok.io/connect/google'
+          );
+        }}
+      >
+        LOGIN
+      </button>
     </div>
   );
 };

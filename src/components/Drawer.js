@@ -115,8 +115,9 @@ export default function TemporaryDrawer() {
             </Typography>
             <Button
               color="inherit"
+              key="Login"
               onClick={() => {
-                history.push('/Login');
+                history.push('/login');
               }}
             >
               Login

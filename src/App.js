@@ -13,7 +13,7 @@ function App() {
         <Drawer />
         <Switch>
           <Route exact path="/" component={InputTable} />
-          <Route path="/Login" component={Login} />
+          <Route path="/login" component={Login} />
         </Switch>
       </div>
     </BrowserRouter>

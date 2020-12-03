@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="64" viewBox="0 0 208 64">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 29.633px;
+        fill: #fff;
+        text-anchor: middle;
+        font-family: "Montserrat Alternates";
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <text id="student_tools" data-name="student tools" class="cls-1" x="104.372" y="47.013"><tspan x="104.372">student tools</tspan></text>
+</svg>

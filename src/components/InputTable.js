@@ -22,9 +22,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { fetchGradeData } from '../api/index';
 import '../App.css';
-import axios from 'axios';
 
 const url = 'http://localhost:1337/grades';
 
@@ -80,7 +78,6 @@ const InputTable = () => {
   const [maxGrade, setMaxGrade] = useState();
   const [minGrade, setMinGrade] = useState();
   const [grades, setGrades] = useState([]);
-  const [gradeForm, setGradeForm] = useState([]);
   const classes = useStyles();
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);

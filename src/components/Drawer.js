@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,6 +16,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CreateIcon from '@material-ui/icons/Create';
 import { useHistory } from 'react-router-dom';
 import logo from '../assets/appbar-logo.svg';
+import { UserContext } from '../UserContext';
+import Cookie from 'js-cookie';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,8 +38,55 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const LoginState = () => {
+  const username = useContext(UserContext);
+  const history = useHistory();
+
+  if (username != null) {
+    return (
+      <a>
+        <Button color="inherit" disableRipple="true">
+          {username}
+        </Button>
+
+        <Button
+          color="inherit"
+          onClick={() => {
+            Cookie.remove('token');
+            window.location.reload();
+          }}
+        >
+          Logout
+        </Button>
+      </a>
+    );
+  } else {
+    return (
+      <div>
+        <Button
+          color="inherit"
+          onClick={() => {
+            history.push('/login');
+          }}
+        >
+          Login
+        </Button>
+        <Button
+          color="inherit"
+          onClick={() => {
+            history.push('/sign-up');
+          }}
+        >
+          Sign Up
+        </Button>
+      </div>
+    );
+  }
+};
+
 export default function TemporaryDrawer() {
   const classes = useStyles();
+
   const [state, setState] = React.useState({
     left: false,
   });
@@ -113,14 +162,7 @@ export default function TemporaryDrawer() {
             <Typography variant="h6" className={classes.title}>
               <img src={logo} alt="student tools" />
             </Typography>
-            <Button
-              color="inherit"
-              onClick={() => {
-                history.push('/login');
-              }}
-            >
-              Login
-            </Button>
+            <LoginState />
           </Toolbar>
         </AppBar>
         <Drawer

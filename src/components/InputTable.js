@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import MaterialTable from 'material-table';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,6 +22,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { UserContext } from '../UserContext';
 import '../App.css';
 
 const url = 'http://localhost:1337/grades';
@@ -82,8 +83,9 @@ const InputTable = () => {
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
+  const username = useContext(UserContext);
+
   const columns = [
-    { tite: 'id', field: 'id', hidden: 'true' },
     { tite: 'created_at', field: 'created_at', hidden: 'true' },
     { tite: 'updated_at', field: 'updated_at', hidden: 'true' },
     {
@@ -95,7 +97,12 @@ const InputTable = () => {
       },
     },
     { title: 'Score', field: 'score' },
-    { title: 'Grade %', field: 'grade', type: 'numeric', editable: 'never' },
+    {
+      title: 'Grade %',
+      field: 'percentage',
+      type: 'numeric',
+      editable: 'never',
+    },
     { title: 'Weight %', field: 'weight', type: 'numeric' },
   ];
 
@@ -114,8 +121,9 @@ const InputTable = () => {
       body: JSON.stringify({
         assessement: newData.assessement,
         score: newData.score,
-        grade: newData.grade,
+        percentage: newData.percentage,
         weight: newData.weight,
+        user: username,
       }),
     })
       .then((res) => {
@@ -137,8 +145,9 @@ const InputTable = () => {
       body: JSON.stringify({
         assessement: newData.assessement,
         score: newData.score,
-        grade: newData.grade,
+        percentage: newData.grade,
         weight: newData.weight,
+        user: username,
       }),
     }).then((res) => {
       const dataUpdate = [...grades];
@@ -169,7 +178,7 @@ const InputTable = () => {
   };
 
   const fetchData = () => {
-    fetch(`http://localhost:1337/grades`)
+    fetch(`http://localhost:1337/grades?user=${username}`)
       .then((res) => res.json())
       .then((json) => setGrades(json));
   };
@@ -194,9 +203,9 @@ const InputTable = () => {
 
     const weightedScore = grades.map((grade) => {
       if (+grade.weight) {
-        return +grade.weight * +grade.grade;
+        return +grade.weight * +grade.percentage;
       } else {
-        return 0 * +grade.grade;
+        return 0 * +grade.percentage;
       }
     });
     const currentTotal = +(
@@ -220,6 +229,8 @@ const InputTable = () => {
     isNaN(currentTotal) ? setCurrentGrade(0) : setCurrentGrade(currentTotal);
 
     isNaN(needed) ? setGradeNeeded(0) : setGradeNeeded(needed);
+
+    console.log(weights);
   }, [desired, grades]);
 
   return (
@@ -261,12 +272,12 @@ const InputTable = () => {
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve) => {
-                newData.grade = scoreToGrade(newData.score);
+                newData.percentage = scoreToGrade(newData.score);
                 handleRowAdd(newData, resolve);
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve) => {
-                newData.grade = scoreToGrade(newData.score);
+                newData.percentage = scoreToGrade(newData.score);
                 handleRowUpdate(newData, oldData, resolve);
               }),
             onRowDelete: (oldData) =>

@@ -25,7 +25,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { UserContext } from '../UserContext';
 import '../App.css';
 
-const url = 'http://localhost:1337/grades';
+const url = 'https://studenttools.ts.r.appspot.com/grades';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -90,7 +90,7 @@ const InputTable = () => {
     { tite: 'updated_at', field: 'updated_at', hidden: 'true' },
     {
       title: 'Item Name',
-      field: 'assessement',
+      field: 'assessment',
       cellStyle: {
         width: 300,
         minWidth: 300,
@@ -119,7 +119,7 @@ const InputTable = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        assessement: newData.assessement,
+        assessment: newData.assessment,
         score: newData.score,
         percentage: newData.percentage,
         weight: newData.weight,
@@ -143,7 +143,7 @@ const InputTable = () => {
     fetch(url + '/' + newData.id, {
       method: 'PUT',
       body: JSON.stringify({
-        assessement: newData.assessement,
+        assessment: newData.assessment,
         score: newData.score,
         percentage: newData.grade,
         weight: newData.weight,
@@ -178,7 +178,7 @@ const InputTable = () => {
   };
 
   const fetchData = () => {
-    fetch(`http://localhost:1337/grades?user=${username}`)
+    fetch(`https://studenttools.ts.r.appspot.com/grades?user=${username}`)
       .then((res) => res.json())
       .then((json) => setGrades(json));
   };
@@ -249,7 +249,7 @@ const InputTable = () => {
             },
           }}
           icons={tableIcons}
-          title="Assessement Items"
+          title="Assessment Items"
           columns={columns}
           data={grades}
           options={{

@@ -56,7 +56,7 @@ export default function SignIn() {
   const [password, setPassword] = useState();
 
   const handleLogin = (email, password) => {
-    fetch('http://localhost:1337/auth/local', {
+    fetch('https://studenttools.ts.r.appspot.com/auth/local', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

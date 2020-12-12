@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      fetch(`http://localhost:1337/users/me`, {
+      fetch(`https://studenttools.ts.r.appspot.com/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RegisterUser = (username, email, password, setResponse) => {
-  fetch('http://localhost:1337/auth/local/register', {
+  fetch('https://studenttools.ts.r.appspot.com/auth/local/register', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

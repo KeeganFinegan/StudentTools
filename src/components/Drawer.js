@@ -45,7 +45,7 @@ const LoginState = () => {
   if (username != null) {
     return (
       <a>
-        <Button color="inherit" disableRipple="true">
+        <Button size="large" color="inherit" disableRipple="true">
           {username}
         </Button>
 

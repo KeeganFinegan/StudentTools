@@ -23,6 +23,12 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { UserContext } from '../UserContext';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+
 import '../App.css';
 
 const url = 'https://studenttools.ts.r.appspot.com/grades';
@@ -82,6 +88,8 @@ const InputTable = () => {
   const classes = useStyles();
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
+  const [age, setAge] = React.useState('');
+  const [open, setOpen] = React.useState(false);
 
   const username = useContext(UserContext);
 
@@ -108,6 +116,18 @@ const InputTable = () => {
 
   const handleChange = (event) => {
     setDesired(event.target.value);
+  };
+
+  const handleChangeMenu = (event) => {
+    setAge(event.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   const handleRowAdd = (newData, resolve) => {
@@ -145,7 +165,7 @@ const InputTable = () => {
       body: JSON.stringify({
         assessment: newData.assessment,
         score: newData.score,
-        percentage: newData.grade,
+        percentage: newData.percentage,
         weight: newData.weight,
         user: username,
       }),
@@ -235,6 +255,27 @@ const InputTable = () => {
 
   return (
     <div className="grid-container">
+      <div className="subject">
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-controlled-open-select-label">
+            Subject
+          </InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={age}
+            onChange={handleChangeMenu}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
       <div className="table-container">
         <MaterialTable
           localization={{

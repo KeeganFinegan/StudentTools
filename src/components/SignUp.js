@@ -79,7 +79,7 @@ const RegisterAction = (props) => {
   } else if (props.response.jwt) {
     Cookie.set('token', props.response.jwt);
 
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   } else {
     return <div></div>;
   }

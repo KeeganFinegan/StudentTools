@@ -27,7 +27,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
 
 import '../App.css';
 
@@ -160,14 +159,17 @@ const InputTable = () => {
   };
 
   const handleRowUpdate = (newData, oldData, resolve) => {
-    fetch(url + '/' + newData.id, {
+    fetch(url + '/' + oldData.id, {
       method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         assessment: newData.assessment,
         score: newData.score,
         percentage: newData.percentage,
         weight: newData.weight,
-        user: username,
       }),
     }).then((res) => {
       const dataUpdate = [...grades];
@@ -177,6 +179,7 @@ const InputTable = () => {
       resolve();
       setIserror(false);
       setErrorMessages([]);
+      console.log(newData.assessment);
     });
   };
   const handleRowDelete = (oldData, resolve) => {
@@ -249,8 +252,6 @@ const InputTable = () => {
     isNaN(currentTotal) ? setCurrentGrade(0) : setCurrentGrade(currentTotal);
 
     isNaN(needed) ? setGradeNeeded(0) : setGradeNeeded(needed);
-
-    console.log(weights);
   }, [desired, grades]);
 
   return (

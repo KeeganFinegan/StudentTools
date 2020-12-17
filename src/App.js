@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import InputTable from './components/InputTable';
 import Drawer from './components/Drawer';
 import Login from './components/Login';
